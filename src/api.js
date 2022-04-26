@@ -7,7 +7,7 @@ const api = axios.create({
 })
 
 const onRequest = config => {
-  if (!cookies.get('XSRF-TOKEN')) {
+  if (cookies.get('XSRF-TOKEN')) {
     return config
   }
 
@@ -19,7 +19,7 @@ const onRequest = config => {
 }
 
 const setCSRFToken = () => {
-  return api.get('/csrf-cookie')
+  return api.get('/sanctum/csrf-cookie')
 }
 
 api.interceptors.request.use(onRequest, null)
