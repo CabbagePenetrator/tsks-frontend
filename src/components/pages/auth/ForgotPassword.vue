@@ -20,7 +20,7 @@ const submit = async () => {
 
   try {
     await $api.post('/forgot-password', form)
-    $router.push('/sign-up')
+    await $router.push('/sign-up')
   } catch ({ response }) {
     errors = response?.data?.errors ?? {}
   }
