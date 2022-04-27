@@ -26,9 +26,9 @@ const submit = async () => {
     await $router.push('/')
   } catch ({ response }) {
     errors = response?.data?.errors ?? {}
+  } finally {
+    loading = false
   }
-
-  loading = false
 }
 
 onMounted(() => {

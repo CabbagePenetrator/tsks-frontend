@@ -23,9 +23,9 @@ const submit = async () => {
     await $router.push('/sign-up')
   } catch ({ response }) {
     errors = response?.data?.errors ?? {}
+  } finally {
+    loading = false
   }
-
-  loading = false
 }
 </script>
 
