@@ -1,54 +1,52 @@
 <script setup>
-import GuestLayout from '@/layouts/Guest.vue'
-import LoadingButton from '../../components/LoadingButton.vue'
-import TextInput from '../../components/TextInput.vue'
-import { inject, ref } from 'vue'
+import Guest from '@/components/layouts/Guest.vue'
+import Button from '@/components/shared/Button.vue'
+import Input from '@/components/shared/Input.vue'
+import { inject } from 'vue'
 import { useRouter } from 'vue-router'
 
-const $axios = inject('$axios')
 const $router = useRouter()
-const loading = ref(false)
+const $api = inject('$api')
+let loading = $ref(false)
 
-const form = ref({
+const form = $ref({
   email: '',
 })
 
-const errors = ref({})
+let errors = $ref({})
 
 const submit = async () => {
-  loading.value = true
+  loading = true
 
   try {
-    await $axios.post('/forgot-password', form.value)
-    $router.push('/login')
+    await $api.post('/forgot-password', form)
+    $router.push('/sign-up')
   } catch ({ response }) {
-    errors.value = response?.data?.errors ?? {}
+    errors = response?.data?.errors ?? {}
   }
 
-  loading.value = false
+  loading = false
 }
 </script>
 
 <template>
-  <guest-layout>
-    <form @submit.prevent="submit">
+  <Guest>
+    <form @submit.prevent="submit" class="text-center pt-8">
       <h1 class="text-4xl">Forgot password</h1>
-      <text-input
+      <Input
         v-model="form.email"
         :errors="errors.email"
         class="mt-10"
         type="email"
         placeholder="Email"
       />
-      <loading-button class="mt-8" :loading="loading" type="submit"
-        >Send link</loading-button
-      >
+      <Button class="mt-8" :loading="loading" type="submit">Send link</Button>
+      <p class="mt-6 text-zinc-500">
+        Already have an account?
+        <router-link class="text-white" :to="{ path: 'sign-in' }">
+          Sign in
+        </router-link>
+      </p>
     </form>
-    <p class="mt-6 text-zinc-500">
-      Already have an account?
-      <router-link class="text-white" :to="{ path: 'login' }"
-        >Sign in</router-link
-      >
-    </p>
-  </guest-layout>
+  </Guest>
 </template>
