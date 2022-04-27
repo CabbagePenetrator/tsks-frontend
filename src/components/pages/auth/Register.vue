@@ -7,7 +7,7 @@ import Button from '@/components/shared/Button.vue'
 
 const $router = useRouter()
 const $api = inject('$api')
-const loading = $ref(false)
+let loading = $ref(false)
 
 const form = $ref({
   name: '',
@@ -16,9 +16,19 @@ const form = $ref({
   password_confirmation: '',
 })
 
+let errors = $ref({})
+
 const submit = async () => {
-  await $api.post('/register', form)
-  $router.push('/')
+  loading = true
+
+  try {
+    await $api.post('/register', form)
+    $router.push('/')
+  } catch ({ response }) {
+    errors = response?.data?.errors ?? {}
+  }
+
+  loading = false
 }
 </script>
 
@@ -26,13 +36,31 @@ const submit = async () => {
   <Guest>
     <h1 class="text-5xl text-center">Sign up.</h1>
     <form @submit.prevent="submit" class="text-center pt-8">
-      <Input v-model="form.name" class="pt-4" placeholder="Name" />
-      <Input v-model="form.email" class="pt-4" placeholder="Email" />
-      <Input v-model="form.password" class="pt-4" placeholder="Password" />
+      <Input
+        v-model="form.name"
+        :errors="errors.name"
+        class="pt-4"
+        placeholder="Name"
+      />
+      <Input
+        v-model="form.email"
+        :errors="errors.email"
+        class="pt-4"
+        placeholder="Email"
+      />
+      <Input
+        v-model="form.password"
+        :errors="errors.password"
+        class="pt-4"
+        placeholder="Password"
+        type="password"
+      />
       <Input
         v-model="form.password_confirmation"
+        :errors="errors.password_confirmation"
         class="pt-4"
         placeholder="Confirm password"
+        type="password"
       />
       <div class="pt-8">
         <Button :loading="loading">Sign up</Button>
