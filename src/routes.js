@@ -31,6 +31,12 @@ const routes = [
     component: () => import('@/components/pages/Dashboard.vue'),
     meta: { title: 'Dashboard' },
   },
+  {
+    path: '/collections',
+    name: 'collections',
+    component: () => import('@/components/pages/collections/Index.vue'),
+    meta: { title: 'Collections' },
+  },
 ]
 
 const router = createRouter({
