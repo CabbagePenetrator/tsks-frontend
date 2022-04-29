@@ -4,7 +4,7 @@ import Auth from '@/components/layouts/Auth.vue'
 
 <template>
   <Auth>
-    <h2 class="text-4xl">
+    <h2 class="text-4xl pt-14">
       <div>Good morning,</div>
       <div>Jane Doe</div>
     </h2>
