@@ -41,7 +41,7 @@ const submit = async () => {
         placeholder="Email"
       />
       <Input
-        v-model="form.email"
+        v-model="form.password"
         :errors="errors.password"
         class="pt-4"
         placeholder="Password"
