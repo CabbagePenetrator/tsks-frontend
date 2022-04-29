@@ -23,7 +23,7 @@ const submit = async () => {
 
   try {
     await $api.post('/reset-password', form)
-    await $router.push('/')
+    await $router.push({ name: 'dashboard' })
   } catch ({ response }) {
     errors = response?.data?.errors ?? {}
   } finally {

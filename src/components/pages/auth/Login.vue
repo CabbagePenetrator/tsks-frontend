@@ -21,7 +21,7 @@ const submit = async () => {
 
   try {
     await $api.post('/login', form)
-    await $router.push('/')
+    await $router.push({ name: 'dashboard' })
   } catch ({ response }) {
     errors = response?.data?.errors ?? {}
   } finally {
