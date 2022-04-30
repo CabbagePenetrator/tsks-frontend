@@ -8,7 +8,7 @@ const $route = useRoute()
 <template>
   <div class="px-6">
     <div class="flex justify-between items-center pt-8">
-      <h1 class="text-xl">{{ $route.meta.title }}</h1>
+      <h1 class="text-2xl">{{ $route.meta.title }}</h1>
       <button>
         <svg
           class="h-6 w-6 opacity-50"
