@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       colors: {
         slate: {
+          700: '#21212D',
           900: '#181820',
         },
         fuchsia: {
