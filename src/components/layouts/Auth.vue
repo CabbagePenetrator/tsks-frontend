@@ -1,5 +1,6 @@
 <script setup>
 import { useRoute } from 'vue-router'
+import Nav from '@/components/shared/Nav.vue'
 
 const $route = useRoute()
 </script>
@@ -26,4 +27,5 @@ const $route = useRoute()
     </div>
     <slot />
   </div>
+  <Nav />
 </template>
