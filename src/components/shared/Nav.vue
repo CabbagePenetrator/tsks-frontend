@@ -6,7 +6,7 @@ const $route = useRoute()
 </script>
 
 <template>
-  <nav class="fixed bottom-0 left-0 right-0 pb-6 px-6">
+  <nav class="fixed bottom-0 left-0 right-0 pb-6 pt-4 px-6 bg-slate-900">
     <ul
       class="grid grid-flow-col items-center justify-between justify-items-center text-zinc-500"
     >
