@@ -1,33 +1,81 @@
 <script setup>
-const props = defineProps({
+defineProps({
   collection: Object,
 })
+
+const collapsed = $ref(false)
+
+const complete = () => {}
 </script>
 
 <template>
-  <li class="bg-slate-700 rounded-xl p-4">
-    <div
-      :style="{ background: collection.color }"
-      class="w-8 h-8 rounded-md"
-    ></div>
-    <h2 class="pt-6">{{ collection.title }}</h2>
-    <div class="flex justify-between items-center pt-2">
-      <div class="text-xs text-zinc-500">
-        {{ collection.tasks.filter(task => task.completed).length }} /
-        {{ collection.tasks.length }} done
+  <li class="rounded-xl overflow-hidden bg-zinc-900">
+    <button
+      class="flex w-full justify-between items-center p-4 bg-zinc-800"
+      @click="collapsed = !collapsed"
+    >
+      <div class="text-xl flex gap-3 items-center">
+        <div
+          :style="{ background: collection.color }"
+          class="w-6 h-6 rounded-md"
+        ></div>
+        <h2>
+          {{ collection.title }}
+        </h2>
       </div>
-      <div
-        :style="{ background: collection.color }"
-        class="h-5 w-5 rounded-full grid place-items-center"
+      <button
+        class="text-zinc-500 transition-transform duration-300"
+        :class="{ 'transform rotate-180': collapsed }"
       >
-        <svg class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+        <svg
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <path
-            fill-rule="evenodd"
-            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-            clip-rule="evenodd"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M5 15l7-7 7 7"
           />
         </svg>
-      </div>
+      </button>
+    </button>
+    <ul
+      :style="{ height: collapsed ? 0 : collection.tasks.length * 64 + 'px' }"
+      class="px-4 grid overflow-hidden duration-300 transition-all"
+      :class="{ 'pb-5': !collapsed }"
+    >
+      <li v-for="task in collection.tasks" class="flex gap-3 items-start pt-5">
+        <button
+          :style="{ 'border-color': collection.color }"
+          class="border-2 rounded-lg w-6 h-6"
+          @click="complete"
+        ></button>
+        <div class="">
+          <h3>{{ task.title }}</h3>
+          <div class="text-xs text-red-500 pt-1">Today 12:00</div>
+        </div>
+      </li>
+    </ul>
+    <div class="text-center py-4 border-t-2 border-zinc-800">
+      <router-link :to="{ path: 'collections' }" class="inline-flex">
+        <div>Go to collection</div>
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13 7l5 5m0 0l-5 5m5-5H6"
+          />
+        </svg>
+      </router-link>
     </div>
   </li>
 </template>

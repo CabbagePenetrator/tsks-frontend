@@ -17,7 +17,7 @@ export default {
   <div :class="$attrs.class">
     <div class="relative flex items-center" :class="{ shake: errors }">
       <input
-        class="w-full py-2 pl-4 pr-10 bg-transparent border-2 rounded-lg border-zinc-800 focus-visible:outline-none focus-visible:border-fuchsia-400"
+        class="w-full py-2 pl-4 pr-10 bg-transparent border-2 rounded-lg border-zinc-700 focus-visible:outline-none focus-visible:border-fuchsia-400"
         :class="{ 'border-red-900': errors }"
         type="text"
         v-bind="{ ...$attrs, class: null }"

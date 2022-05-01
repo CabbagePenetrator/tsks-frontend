@@ -1,5 +1,15 @@
 <script setup>
 import Auth from '@/components/layouts/Auth.vue'
+import Collection from '@/components/shared/Collection.vue'
+import { inject, onBeforeMount, ref } from 'vue'
+
+const $api = inject('$api')
+const collections = ref([])
+
+onBeforeMount(async () => {
+  const { data } = await $api.get('/api/collections')
+  collections.value = data.collections
+})
 </script>
 
 <template>
@@ -16,5 +26,12 @@ import Auth from '@/components/layouts/Auth.vue'
         Statistics
       </button>
     </div>
+    <ul class="grid gap-5 pt-8">
+      <Collection
+        v-for="collection in collections"
+        :key="collection.id"
+        :collection="collection"
+      />
+    </ul>
   </Auth>
 </template>
