@@ -15,10 +15,9 @@ const logout = async () => {
 </script>
 
 <template>
-  <div class="px-6">
+  <div class="px-6 pb-20">
     <div class="flex justify-between items-center pt-8">
       <h1 class="text-2xl">{{ $route.meta.title }}</h1>
-      <!-- TODO: Make this button do something -->
       <button class="relative" @click="showMenu = !showMenu">
         <svg
           class="h-6 w-6 opacity-50"
