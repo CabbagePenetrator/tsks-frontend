@@ -36,7 +36,10 @@ onBeforeMount(async () => {
         ></div>
         <h2 class="pt-6">{{ collection.title }}</h2>
         <div class="flex justify-between items-center pt-2">
-          <div class="text-xs text-zinc-500">4/8 done</div>
+          <div class="text-xs text-zinc-500">
+            {{ collection.tasks.filter(task => task.completed).length }} /
+            {{ collection.tasks.length }} done
+          </div>
           <div
             :style="{ background: collection.color }"
             class="h-5 w-5 rounded-full grid place-items-center"
