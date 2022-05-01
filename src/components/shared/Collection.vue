@@ -1,11 +1,11 @@
 <script setup>
+import Task from '@/components/shared/Task.vue'
+
 defineProps({
   collection: Object,
 })
 
 const collapsed = $ref(false)
-
-const complete = () => {}
 </script>
 
 <template>
@@ -43,21 +43,16 @@ const complete = () => {}
       </button>
     </button>
     <ul
-      :style="{ height: collapsed ? 0 : collection.tasks.length * 64 + 'px' }"
+      :style="{ height: collapsed ? 0 : collection.tasks.length * 68 + 'px' }"
       class="px-4 grid overflow-hidden duration-300 transition-all"
       :class="{ 'pb-5': !collapsed }"
     >
-      <li v-for="task in collection.tasks" class="flex gap-3 items-start pt-5">
-        <button
-          :style="{ 'border-color': collection.color }"
-          class="border-2 rounded-lg w-6 h-6"
-          @click="complete"
-        ></button>
-        <div class="">
-          <h3>{{ task.title }}</h3>
-          <div class="text-xs text-red-500 pt-1">Today 12:00</div>
-        </div>
-      </li>
+      <Task
+        v-for="task in collection.tasks"
+        :key="task.id"
+        :task="task"
+        :color="collection.color"
+      />
     </ul>
     <div class="text-center py-4 border-t-2 border-zinc-800">
       <router-link :to="{ path: 'collections' }" class="inline-flex">
